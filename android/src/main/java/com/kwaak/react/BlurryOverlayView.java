@@ -45,6 +45,8 @@ public class BlurryOverlayView extends ImageView {
 
         Log.i(LOGTAG, String.format("viewGroup %s", viewGroup));
         Log.i(LOGTAG, String.format("this %s", this));
+        Log.i(LOGTAG, String.format("radius %s", this.radius));
+        Log.i(LOGTAG, String.format("sampling %s", this.sampling));
 
         Blurry.Composer c = Blurry.with(activity)
                 .radius(this.radius)
@@ -53,8 +55,8 @@ public class BlurryOverlayView extends ImageView {
         if(this.color != null)
                 c = c.color(Color.parseColor(this.color));
 
-        //c.async()
-        c.capture(viewGroup)
+        c.async()
+        .capture(viewGroup)
         .into(this);
     }
 
@@ -78,6 +80,11 @@ public class BlurryOverlayView extends ImageView {
 
     public void setColorAndUpdate(String color) {
         this.color = color;
+        Render(activity);
+    }
+
+    public void apply() {
+        Log.i(LOGTAG, String.format("apply: %s, %s", this.radius, this.sampling));
         Render(activity);
     }
 }

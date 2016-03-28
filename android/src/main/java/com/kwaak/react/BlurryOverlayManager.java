@@ -28,6 +28,11 @@ public class BlurryOverlayManager extends SimpleViewManager<BlurryOverlayView> {
         return c;
     }
 
+    @Override
+    protected void onAfterUpdateTransaction(BlurryOverlayView view) {
+        view.apply();
+    }
+
     @ReactProp(name = "radius", defaultInt = 0)
     public void setRadius(BlurryOverlayView view, int radius) {
         view.setRadiusAndUpdate(radius);
